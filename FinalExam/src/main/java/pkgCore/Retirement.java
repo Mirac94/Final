@@ -42,15 +42,14 @@ public class Retirement {
 	
 		public double TotalAmountSaved()
 		{
-			if (dRequiredIncome > dMonthlySSI) {
-				return (double) Math.abs(Math.round(100*FinanceLib.pv(dAnnualReturnRetired/(100*12),
-						iYearsRetired*12, dRequiredIncome-dMonthlySSI, 0, false)))/100;
-			}
-			else {
-				return 0;
-			}
-
+			double dMonthsRetired = this.iYearsRetired * 12;
+			double rAnnaulReturnRetired =this.dAnnualReturnRetired / 12;
+			double dRequiredIncome = this.dRequiredIncome;
+			double dMonthlySSI = this.dMonthlySSI;
+	        double pv = FinanceLib.pv(rAnnaulReturnRetired, dMonthsRetired, dRequiredIncome - dMonthlySSI, 0, false);
+	        return pv;
 		}
+
 public int getiYearsToWork() {
 	return iYearsToWork;
 }
